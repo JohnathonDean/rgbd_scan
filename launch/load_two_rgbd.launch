@@ -1,0 +1,19 @@
+
+<launch>
+  <include file="$(find realsense2_camera)/launch/rs_multiple_devices.launch" />  
+  <node pkg="rgbd_scan" type="Depth2Pointcloud_cam" name="Depth2Pointcloud_cam1" output="screen" >
+    <param name="frame_id" value="camera1_depth_frame" />
+    <param name="transform" value="false" />
+    <remap from="camera/color/image_raw" to="camera1/color/image_raw" />
+    <remap from="camera/depth/image_rect_raw" to="camera1/depth/image_rect_raw" />
+    <remap from="~/generated_pointcloud" to="generated_pointcloud1"/>
+  </node>
+  <node pkg="rgbd_scan" type="Depth2Pointcloud_cam" name="Depth2Pointcloud_cam2" output="screen" >
+    <param name="frame_id" value="camera2_depth_frame" />
+    <param name="transform" value="true" />
+    <remap from="camera/color/image_raw" to="camera2/color/image_raw" />
+    <remap from="camera/depth/image_rect_raw" to="camera2/depth/image_rect_raw" />
+    <remap from="~/generated_pointcloud" to="generated_pointcloud2" />
+  </node>
+
+</launch>
